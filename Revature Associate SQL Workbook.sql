@@ -53,14 +53,31 @@ SELECT * from employee WHERE hiredate BETWEEN '01-JUN-03' AND '01-MAR-04';
 -- In this section you will be using the Oracle system functions, as well as your own functions, to perform various actions against the database
 -- 3.1 System Defined Functions
 -- Task � Create a function that returns the current time.
+CREATE or REPLACE FUNCTION getCurrentDate 
+RETURN date 
+IS 
+c_sysdate date;
+BEGIN
+    SELECT sysdate INTO c_sysdate from dual;
+    RETURN c_sysdate;
+END;
 -- Task � create a function that returns the length of a mediatype from the mediatype table
+SELECT 
+  mediatype.name string,
+  LENGTH(mediatype.name) Len
+FROM 
+  mediatype;
 -- 3.2 System Defined Aggregate Functions
 -- Task � Create a function that returns the average total of all invoices
+select AVG(all total) from invoice;
 -- Task � Create a function that returns the most expensive track
+select max(unitprice) from track;
 -- 3.3 User Defined Scalar Functions
 -- Task � Create a function that returns the average price of invoiceline items in the invoiceline table
+select AVG(all unitprice) from invoiceline;
 -- 3.4 User Defined Table Valued Functions
 -- Task � Create a function that returns all employees who are born after 1968.
+SELECT * from employee WHERE birthdate BETWEEN '01-JAN-68' AND '30-OCT-19';
 
 -- 4.0 Stored Procedures
 --  In this section you will be creating and executing stored procedures. You will be creating various types of stored procedures that take input and output parameters.
